@@ -1,0 +1,38 @@
+<div *ngIf="errorMessage" class="error-message">
+  {{ errorMessage }}
+</div>
+
+<div *ngIf="!selectedCard">
+  <!-- Card List View -->
+  <div class="card-container">
+    <div class="card" *ngFor="let card of cards | paginate: { itemsPerPage: 4, currentPage: p }" (click)="onSelectCard(card)">
+      <div class="card-image" style="width: 18rem;">
+        <img [src]="card.image" class="card-img-top" alt="{{card.title}}">
+      </div>
+      <div class="card-body">
+        <h5 class="card-title">{{card.title}}</h5>
+        <p class="card-text" [innerHTML]="card.description_eng"></p>
+      </div>
+    </div>
+  </div>
+  <div>
+    <pagination-controls (pageChange)="p = $event"></pagination-controls>
+  </div>
+</div>
+
+<div *ngIf="selectedCard">
+  <!-- Card Detail View -->
+  <button (click)="onBack()">Back</button>
+  <div class="card-detail">
+    <div class="card-image" style="width: 18rem;">
+      <img [src]="selectedCard.image" class="card-img-top" alt="{{selectedCard.title}}">
+    </div>
+    <div class="card-body">
+      <h5 class="card-title">{{selectedCard.title}}</h5>
+      <p class="card-text" [innerHTML]="selectedCard.description_eng"></p>
+      <!-- Add more details if needed -->
+    </div>
+  </div>
+</div>
+
+

@@ -1,0 +1,27 @@
+service: serverless
+
+frameworkVersion: "3"
+
+plugins:
+  - serverless-offline
+
+
+provider:
+  name: aws
+  runtime: nodejs20.x
+  region: ap-south-1
+
+functions:
+  getbyid :
+    handler: handler.getbyid 
+    events:
+      - httpApi:
+          path: /get/{id}
+          method: get
+
+  getAll :
+    handler: handler.getAll
+    events:
+      - httpApi:
+          path: /getAll
+          method: get
